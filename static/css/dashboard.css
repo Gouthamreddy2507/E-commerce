@@ -1,0 +1,171 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard-container {
+    padding: 2rem;
+}
+
+.dashboard-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+#search-bar {
+    padding: 0.7rem;
+    width: 60%;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin: 1rem 0;
+    font-size: 1rem;
+}
+
+.dashboard-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.dashboard-links a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #3b82f6;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.dashboard-links a:hover {
+    background-color: #2563eb;
+}
+
+.product-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.product-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.image-wrapper {
+    position: relative;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.best-seller {
+    background-color: #22c55e;
+}
+
+.out-of-stock {
+    background-color: #f59e0b;
+}
+
+.discontinued {
+    background-color: #ef4444;
+}
+
+.product-info {
+    padding: 1rem;
+}
+
+.product-name {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    color: #111827;
+}
+
+.brand, .category, .quality, .stock, .rating {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin: 0.2rem 0;
+}
+
+.description {
+    margin-top: 0.5rem;
+    color: #374151;
+    font-size: 0.9rem;
+}
+
+.price-section {
+    margin: 0.8rem 0;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #9ca3af;
+    margin-right: 0.5rem;
+}
+
+.discounted-price, .final-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #10b981;
+}
+
+.discount-tag {
+    background-color: #f43f5e;
+    color: white;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.btn {
+    background-color: #3b82f6;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.btn:hover {
+    background-color: #2563eb;
+}
+
+.favorite-btn {
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.favorite-btn.active {
+    color: red;
+}

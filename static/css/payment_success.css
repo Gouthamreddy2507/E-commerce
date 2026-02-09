@@ -1,0 +1,35 @@
+.success-container {
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.success-container h2 {
+    color: #28a745;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.success-container p {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}

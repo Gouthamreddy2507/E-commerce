@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - My Store{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+
+    <header class="dashboard-header">
+        <h1>🛍️ Welcome to Your Store Dashboard</h1>
+        <input type="text" id="search-bar" placeholder="Search products...">
+        <div class="dashboard-links">
+           
+        </div>
+    </header>
+
+    <section class="product-section">
+        {% for product in products %}
+        <div class="product-card">
+            <div class="image-wrapper">
+                <img src="{{ product.image or url_for('static', filename='images/default.jpg') }}" alt="{{ product.name }}">
+                {% if product.best_seller %}
+                    <span class="badge best-seller">Best Seller</span>
+                {% endif %}
+                {% if product.status == 'out_of_stock' %}
+                    <span class="badge out-of-stock">Out of Stock</span>
+                {% elif product.status == 'discontinued' %}
+                    <span class="badge discontinued">Discontinued</span>
+                {% endif %}
+            </div>
+
+            <div class="product-info">
+                <h2 class="product-name">{{ product.name }}</h2>
+                <p class="brand">Brand: {{ product.brand }}</p>
+                <p class="category">Category: {{ product.category }}</p>
+                <p class="quality">Condition: {{ product.quality }}</p>
+                <p class="rating">⭐ Rating: {{ product.rating or 'N/A' }}</p>
+                <p class="description">{{ product.description[:100] }}{% if product.description|length > 100 %}...{% endif %}</p>
+                
+                <div class="price-section">
+                    {% if product.discount > 0 %}
+                        <span class="original-price">₹{{ product.price }}</span>
+                        <span class="discounted-price">
+                            ₹{{ '%.2f' | format(product.price - (product.price * product.discount / 100)) }}
+                        </span>
+                        <span class="discount-tag">-{{ product.discount }}%</span>
+                    {% else %}
+                        <span class="final-price">₹{{ product.price }}</span>
+                    {% endif %}
+                </div>
+
+                <p class="stock">In Stock: {{ product.quantity }}</p>
+
+                <div class="card-actions">
+                    <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn">Details</a>
+                    {% if product.id in favorite_ids %}
+                        <a href="{{ url_for('remove_favorite', product_id=product.id) }}" class="favorite-btn active" title="Remove from favorites">❤️</a>
+                    {% else %}
+                        <a href="{{ url_for('add_favorite', product_id=product.id) }}" class="favorite-btn" title="Add to favorites">🤍</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+</div>
+{% endblock %}

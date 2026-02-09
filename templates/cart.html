@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Your Cart</h2>
+{% if cart_items %}
+<table>
+<thead><tr><th>Product</th><th>Qty</th><th>Price</th><th>Subtotal</th></tr></thead>
+<tbody>
+{% for i in cart_items %}
+  <tr>
+    <td><img src="{{ i.image }}" width="50">{{ i.name }}</td>
+    <td>{{ i.quantity }}</td>
+    <td>${{ i.price }}</td>
+    <td>${{ i.subtotal }}</td>
+  </tr>
+{% endfor %}
+<tr><td colspan="3"><strong>Total</strong></td><td>${{ total }}</td></tr>
+</tbody>
+</table>
+<a href="{{ url_for('checkout', product_id=cart_items[0].product_id) }}" class="btn">Proceed to Checkout</a>
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}

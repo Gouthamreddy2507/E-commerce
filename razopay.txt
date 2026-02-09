@@ -1,0 +1,8 @@
+keyid: rzp_test_xxfkdUYWCKHS4E
+key secret:DDFK36eIKqNL514rmiJ4vahF
+
+pip install jaraco.text
+pip install platformdirs
+pip install razorpay
+
+AWS-PWD: --Zu7&J%n5Nbz491)y*kin3c1inn%-(P

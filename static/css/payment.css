@@ -1,0 +1,35 @@
+.payment-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.payment-container h2 {
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.payment-container p {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.pay-btn {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.pay-btn:hover {
+    background-color: #218838;
+}

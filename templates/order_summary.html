@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/order_summary.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="order-container">
+    <h2>Order Summary</h2>
+    
+    <div class="order-details">
+        <p><strong>Product:</strong> {{ product.name }}</p>
+        <p><strong>Price:</strong> ${{ product.price }}</p>
+        <p><strong>Quantity:</strong> {{ order.quantity }}</p>
+        <p><strong>Total Price:</strong> ${{ order.total_price }}</p>
+        <p><strong>Shipping Address:</strong></p>
+        <p>{{ order.address }}</p>
+        <p><strong>Order Date:</strong> {{ order.order_date }}</p>
+        <p><strong>Estimated Delivery:</strong> {{ order.delivery_date }}</p>
+        <p><strong>Status:</strong> <span class="status {{ order.status|lower }}">{{ order.status }}</span></p>
+
+        {% if order.tracking_id %}
+        <p><strong>Tracking ID:</strong> {{ order.tracking_id }}</p>
+        {% endif %}
+
+        <a href="{{ url_for('payment', order_id=order.id) }}" class="btn">Proceed to Payment</a>
+    </div>
+</div>
+{% endblock %}

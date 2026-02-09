@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }} - Product Details{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/product_detail.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="product-detail-container">
+
+    <div class="product-detail-card">
+
+        <div class="image-section">
+            <img src="{{ url_for('static', filename=product.image.split('static/')[1]) if product.image else url_for('static', filename='images/default.jpg') }}" alt="{{ product.name }}">
+            {% if product.best_seller %}
+                <span class="badge best-seller">🔥 Best Seller</span>
+            {% endif %}
+            {% if product.status == 'out_of_stock' %}
+                <span class="badge out-of-stock">Out of Stock</span>
+            {% elif product.status == 'discontinued' %}
+                <span class="badge discontinued">Discontinued</span>
+            {% endif %}
+        </div>
+
+        <div class="info-section">
+            <h1>{{ product.name }}</h1>
+            <p class="brand">Brand: {{ product.brand or "N/A" }}</p>
+            <p class="category">Category: {{ product.category or "Uncategorized" }}</p>
+            <p class="quality">Condition: <strong>{{ product.quality }}</strong></p>
+            <p class="description">{{ product.description }}</p>
+
+            <div class="price-block">
+                {% if product.discount > 0 %}
+                    <span class="original-price">₹{{ product.price }}</span>
+                    <span class="discounted-price">
+                        ₹{{ '%.2f' | format(product.price - (product.price * product.discount / 100)) }}
+                    </span>
+                    <span class="discount-tag">Save {{ product.discount }}%</span>
+                {% else %}
+                    <span class="final-price">₹{{ product.price }}</span>
+                {% endif %}
+            </div>
+
+            <p class="stock">Availability: <strong>{{ product.quantity }} in stock</strong></p>
+            <p class="rating">Rating: ⭐ {{ product.rating or "N/A" }}</p>
+            <p class="return-policy"><strong>Return Policy:</strong> {{ product.return_policy or "Not specified" }}</p>
+
+            <div class="action-buttons">
+                <a href="{{ url_for('checkout', product_id=product.id) }}" class="btn buy">Buy Now</a>
+                <a href="{{ url_for('add_cart', product_id=product.id) }}" class="btn cart">🛒 Add to Cart</a>
+                <a href="{{ url_for('add_favorite', product_id=product.id) }}" class="btn favorite">❤️ Favorite</a>
+            </div>
+        </div>
+    </div>
+<div class="review-section">
+    <h2>Customer Reviews</h2>
+    
+    {% if product_comments %}
+        <ul class="review-list">
+            {% for review in product_comments %}
+                <li class="review-item">
+                    <div class="review-meta">
+                        <span class="review-username">{{ review.username or "Anonymous" }}</span>
+                        <span class="review-rating">⭐ {{ review.rating }}</span>
+                    </div>
+                    <p class="review-text">{{ review.comment }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No reviews yet. Be the first to leave one!</p>
+    {% endif %}
+</div>
+
+
+<div class="review-form-section">
+    <h2>Leave a Review</h2>
+    
+    {% if error %}
+        <p class="error-msg">{{ error }}</p>
+    {% endif %}
+
+    <form action="{{ url_for('add_review', product_id=product.id) }}" method="POST" class="review-form">
+        <label for="rating">Rating (0.5 to 5):</label>
+        <input type="number" name="rating" min="0.5" max="5" step="0.5" required>
+
+        <label for="comment">Your Comment:</label>
+        <textarea name="comment" rows="4" required></textarea>
+
+        <button type="submit" class="btn submit-review">Submit Review</button>
+    </form>
+</div>
+
+</div>
+{% endblock %}

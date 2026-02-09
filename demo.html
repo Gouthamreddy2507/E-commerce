@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - My Store{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="dashboard-container">
+  
+
+        <h1>Welcome to My Store</h1>
+
+        <div class="product-grid">
+            {% for product in products %}
+            <div class="product-card">
+                <img src="{{ url_for('static', filename=product.image.split('static/')[1]) }}" alt="{{ product.name }}">
+                
+                {% if product.best_seller %}
+                    <span class="best-seller">Best Seller</span>
+                {% endif %}
+                
+                <h2>{{ product.name }}</h2>
+                <p class="description">{{ product.description }}</p>
+                <p class="quality">Quality: {{ product.quality }}</p>
+                
+                <div class="price-section">
+                    {% if product.discount > 0 %}
+                        <p class="original-price">₹{{ product.price }}</p>
+                        <p class="discounted-price">₹{{ '%.2f' | format(product.price - (product.price * product.discount / 100)) }}</p>
+                        <p class="discount">-{{ product.discount }}% Off</p>
+                    {% else %}
+                        <p class="final-price">₹{{ product.price }}</p>
+                    {% endif %}
+                </div>
+                
+                <p class="quantity">Available: {{ product.quantity }} in stock</p>
+
+                <div class="actions">
+                    <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn details-btn">View Details</a>
+                    <a href="{{ url_for('add_favorite', product_id=product.id) }}" class="btn favorite-btn">Add to Favorites</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

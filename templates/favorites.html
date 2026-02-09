@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>My Orders</h2>
+{% if orders %}
+<ul>
+{% for o in orders %}
+  <li>
+    <img src="{{ o.product_img }}" width="50">
+    <strong>{{ o.product_name }}</strong> —
+    ${{ o.total_price }} |
+    Status: {{ o.status }} |
+    Ordered on: {{ o.order_date }}
+    <a href="{{ url_for('order_summary', order_id=o.id) }}">View</a>
+  </li>
+{% endfor %}
+</ul>
+{% else %}
+<p>No orders found.</p>
+{% endif %}
+{% endblock %}
